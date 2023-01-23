@@ -11,7 +11,27 @@ class UserController extends Controller
 {
     public function create(CreateUserRequest $request)
     {
-        return User::query()->create($request);
+        $user = User::query()->create([
+            'name' => $request->name,
+            'login' => $request->login,
+            'password' => $request->password,
+            'role' => $request->role
+        ]);
+        if ($user){
+            return response()->json([
+                "data" => [
+                    "code" => "QSASE"
+                ]
+            ]);
+        } else {
+            return response()->json([
+                "error" => [
+                    "code" => 422,
+                    "message" => "Validation error",
+                    "errors" => array()
+                ]
+            ]);
+        }
     }
     public function showAll()
     {
