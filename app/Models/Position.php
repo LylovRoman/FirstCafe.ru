@@ -9,6 +9,8 @@ class Position extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function dish()
     {
         return $this->hasOne(Dish::class, 'id', 'dish_id');
