@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginAuthRequest;
-use App\Http\Requests\RegisterAuthRequest;
+use App\Http\Requests\Auth\LoginAuthRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
