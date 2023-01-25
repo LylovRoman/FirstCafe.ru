@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
-Route::post('/user/index', [UserController::class, 'index']);
+Route::get('/users', [UserController::class, 'index']);
 Route::post('/user/create', [UserController::class, 'store']);
 Route::post('/user/update/{id}', [UserController::class, 'update']);
