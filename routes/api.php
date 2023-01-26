@@ -3,7 +3,9 @@
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\IsAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +21,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/users', [UserController::class, 'index']);
-Route::post('/user/create', [UserController::class, 'store']);
-Route::post('/user/update/{id}', [UserController::class, 'update']);
+Route::get('/login/failed', function (){
+    return response()->json([
+        "error" => [
+            "code" => 403,
+            "message" => "Login failed"
+        ]
+    ]);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::middleware('admin')->group(function () {
+        Route::get('/users', [UserController::class, 'index']);
+        Route::post('/users', [UserController::class, 'store']);
+    });
+});

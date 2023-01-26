@@ -19,8 +19,7 @@ class AuthController extends Controller
                 ]
             ]);
         } else {
-            $user = User::where('login', $request->login)->first();
-            if ($user && $user->password == $request->password){
+            if (($user = User::where('login', $request->login)->first())  && ($user->password === $request->password)){
                 Auth::login($user);
                 return response()->json([
                     "data" => [
