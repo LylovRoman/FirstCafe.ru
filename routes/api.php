@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ChangeController;
+use App\Http\Controllers\Api\ChangeUserController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -24,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
+
 Route::get('/login/failed', function (){
     return response()->json([
         "error" => [
@@ -32,10 +35,12 @@ Route::get('/login/failed', function (){
         ]
     ]);
 });
-
 Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/users', [UserController::class, 'index']);
         Route::post('/users', [UserController::class, 'store']);
+        Route::post('/change', [ChangeController::class, 'store']);
+        Route::post('/change/user', [ChangeUserController::class, 'store']);
+        Route::get('/change/{id}/orders', [ChangeController::class, 'showOrders']);
     });
 });

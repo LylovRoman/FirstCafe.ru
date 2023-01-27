@@ -30,7 +30,7 @@ class AuthController extends Controller
             return response()->json([
                 "error" => [
                     "code" => 401,
-                    "message" => "Authentication failed"
+                    "message" => "Authentication failed 2"
                 ]
             ]);
         }
@@ -39,6 +39,10 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         return response()->json([
             "data" => [

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Change;
+namespace App\Http\Requests\ChangeUser;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateChangeRequest extends FormRequest
+class StoreChangeUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,8 @@ class UpdateChangeRequest extends FormRequest
     public function rules()
     {
         return [
-            'login' => 'required|unique:users|string',
-            'password' => 'required|string',
-            'name' => 'required|string',
-            'role' => 'required|string'
+            'change_id' => 'required|integer',
+            'user_id' => 'required|integer'
         ];
     }
 }

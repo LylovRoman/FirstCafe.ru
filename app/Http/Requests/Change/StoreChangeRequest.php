@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Change;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,10 +24,7 @@ class StoreChangeRequest extends FormRequest
     public function rules()
     {
         return [
-            'login' => 'required|unique:users|string',
-            'password' => 'required|string',
-            'name' => 'required|string',
-            'role' => 'required|string'
+            'date' => 'required|date'
         ];
     }
 }
