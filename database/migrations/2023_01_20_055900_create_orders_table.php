@@ -17,10 +17,10 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->enum('status', ['accepted', 'cook', 'cooked', 'canceled', 'paid']);
             $table->foreignId('waiter_id')->constrained('users');
+            $table->integer('book_id');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

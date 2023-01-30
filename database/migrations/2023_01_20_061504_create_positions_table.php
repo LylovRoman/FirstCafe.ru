@@ -17,7 +17,6 @@ class CreatePositionsTable extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->foreignId('dish_id')->constrained('dishes');
-            $table->string('amount');
             $table->timestamps();
         });
     }

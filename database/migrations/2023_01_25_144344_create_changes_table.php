@@ -15,7 +15,7 @@ class CreateChangesTable extends Migration
     {
         Schema::create('changes', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->timestamp('timestamp');
             $table->timestamps();
         });
     }

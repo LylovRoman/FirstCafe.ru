@@ -13,7 +13,7 @@ class ChangeController extends Controller
     public function store(StoreChangeRequest $request)
     {
         $change = Change::query()->create([
-            'date' => $request->date,
+            'timestamp' => $request->timestamp,
         ]);
         if ($change){
             return response()->json([
@@ -36,7 +36,7 @@ class ChangeController extends Controller
     {
         $change = Change::query()->where('id', $id)->first();
         if ($change) {
-            $orders = Order::query()->where('created_at', $change->date)->get();
+            $orders = Order::query()->where('created_at', $change->timestamp)->get();
         }
         if ($orders){
             return response()->json([

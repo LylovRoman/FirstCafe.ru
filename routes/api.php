@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ChangeController;
 use App\Http\Controllers\Api\ChangeUserController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ Route::get('/login/failed', function (){
         ]
     ]);
 });
+
 Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/users', [UserController::class, 'index']);
@@ -42,5 +44,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/change', [ChangeController::class, 'store']);
         Route::post('/change/user', [ChangeUserController::class, 'store']);
         Route::get('/change/{id}/orders', [ChangeController::class, 'showOrders']);
+    });
+    Route::middleware('waiter')->group(function () {
+        Route::post('/orders/book', [OrderController::class, 'store']);
     });
 });

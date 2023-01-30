@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Change;
+namespace App\Http\Requests\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreChangeRequest extends FormRequest
+class StoreOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class StoreChangeRequest extends FormRequest
     public function rules()
     {
         return [
-            'timestamp' => 'required|integer'
+            'status' => 'required|string',
+            'waiter_id' => 'required|integer',
+            'book_id' => 'required|integer',
+            'dishes' => 'required|array' //array of integer
         ];
     }
 }

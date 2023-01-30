@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ChangeUser\StoreChangeUserRequest;
+use App\Http\Requests\ChangeUser\StoreOrderRequest;
 use App\Models\Change;
 use App\Models\ChangeUser;
 use App\Models\User;
 
 class ChangeUserController extends Controller
 {
-    public function store(StoreChangeUserRequest $request)
+    public function store(StoreOrderRequest $request)
     {
         $change = Change::query()->where('id', $request->change_id)->first();
         $user = User::query()->where('id', $request->user_id)->first();
