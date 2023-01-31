@@ -11,29 +11,20 @@ class AuthController extends Controller
 {
     public function login(LoginAuthRequest $request)
     {
-        if(Auth::check()){
+        if (($user = User::where('login', $request->login)->first())  && ($user->password === $request->password)){
+            Auth::login($user);
             return response()->json([
-                "error" => [
-                    "code" => 401,
-                    "message" => "Authentication failed"
-                ]
-            ]);
-        } else {
-            if (($user = User::where('login', $request->login)->first())  && ($user->password === $request->password)){
-                Auth::login($user);
-                return response()->json([
-                    "data" => [
-                        "user_token" => $user::generateToken()
-                    ]
-                ]);
-            }
-            return response()->json([
-                "error" => [
-                    "code" => 401,
-                    "message" => "Authentication failed 2"
+                "data" => [
+                    "user_token" => $user->generateToken()
                 ]
             ]);
         }
+        return response()->json([
+            "error" => [
+                "code" => 401,
+                "message" => "Authentication failed 2"
+            ]
+        ]);
     }
 
     public function logout(Request $request)
