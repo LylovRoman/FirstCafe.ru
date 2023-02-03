@@ -22,7 +22,7 @@ class AuthController extends Controller
         return response()->json([
             "error" => [
                 "code" => 401,
-                "message" => "Authentication failed 2"
+                "message" => "Authentication failed"
             ]
         ]);
     }
